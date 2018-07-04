@@ -52,16 +52,14 @@ namespace Interface
             }
         }
 
-
+        private ModelSapato ctx = new ModelSapato();
         public IList<Marca> Marcas { get; set; }
 
         public WindowMarca()
         {
             InitializeComponent();
             this.DataContext = this;
-
-            FacadeMarca facade = new FacadeMarca();
-            this.Marcas = facade.ObterMarca();
+            this.Marcas = ctx.Marcas.ToList();
 
         }
 
@@ -80,8 +78,8 @@ namespace Interface
         {
 
         }
-        
-        ModelSapato ctx = new ModelSapato();
+
+        Marca Marca = new Marca();
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
@@ -89,19 +87,13 @@ namespace Interface
             {
                 ctx.Marcas.Add(MarcaSelecionada);
                 ctx.SaveChanges();
-            }
-            else
-            {
-                if (MarcaSelecionada != null
-                    && MarcaSelecionada.Id > 0)
+                if (this.MarcaSelecionada.Id <= 0)
                 {
-                    Marca ParaSalvar = ctx.Marcas.Find(MarcaSelecionada.Id);
-                    ParaSalvar.MarcaMod = MarcaSelecionada.MarcaMod;
-                    ctx.Entry(ParaSalvar).State =
-                        System.Data.Entity.EntityState.Modified;
-                    ctx.SaveChanges();
+
+                    ctx.Marcas.Add(this.MarcaSelecionada);
                 }
             }
+            ctx.SaveChanges();
             MessageBox.Show("Cadastrado/Salvo com sucesso");
         }
 

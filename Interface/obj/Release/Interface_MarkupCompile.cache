@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Ariane\Desktop\Repositorio\Interface\obj\Debug\
+C:\Users\Ariane\Desktop\Repositorio\Interface\obj\Release\
 Interface
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Ariane\Desktop\Repositorio\Interface\App.xaml
 71854516804
 
 11-959794508
-1381669197394
+138-1705343025
 MainWindow.xaml;WindowGerenciamentoPessoaFisica.xaml;WindowGerenciamentoPessoaJuridica.xaml;WindowMarca.xaml;WindowModelo.xaml;WindowSapatos.xaml;WindowVenda.xaml;
 
 True

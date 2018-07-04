@@ -61,9 +61,7 @@ namespace Interface
             InitializeComponent();
 
             this.DataContext = this;
-
-            FacadePessoaFisica facade = new FacadePessoaFisica();
-            this.PessoasF = facade.ObterPessoaFisicas();
+            this.PessoasF = ctx.PessoasF.ToList();
 
         }
 
@@ -83,29 +81,21 @@ namespace Interface
 
         }
 
+        PessoaFisica PessoaFisica = new PessoaFisica();
+
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             if (ModoCriacaoTime)
             {
                 ctx.PessoasF.Add(PessoaFisicaSelecionada);
                 ctx.SaveChanges();
-            }
-            else
-            {
-                if (PessoaFisicaSelecionada != null
-                    && PessoaFisicaSelecionada.Id > 0)
+                if (this.PessoaFisicaSelecionada.Id <= 0)
                 {
-                    PessoaFisica ParaSalvar = ctx.PessoasF.Find(PessoaFisicaSelecionada.Id);
-                    ParaSalvar.Nome = PessoaFisicaSelecionada.Nome;
-                    ParaSalvar.Fone = PessoaFisicaSelecionada.Fone;
-                    ParaSalvar.Endereco = PessoaFisicaSelecionada.Endereco;
-                    ParaSalvar.Cep  = PessoaFisicaSelecionada.Cep;
-                    ParaSalvar.Cpf = PessoaFisicaSelecionada.Cpf;
-                    ctx.Entry(ParaSalvar).State =
-                        System.Data.Entity.EntityState.Modified;
-                    ctx.SaveChanges();
+
+                    ctx.PessoasF.Add(this.PessoaFisicaSelecionada);
                 }
             }
+            ctx.SaveChanges();
             MessageBox.Show("Cadastrado/Salvo com sucesso");
         }
 

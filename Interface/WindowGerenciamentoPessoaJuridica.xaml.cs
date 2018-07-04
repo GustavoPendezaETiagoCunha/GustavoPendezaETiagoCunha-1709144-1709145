@@ -61,9 +61,7 @@ namespace Interface
             InitializeComponent();
 
             this.DataContext = this;
-
-            FacadePessoaJuridica facade = new FacadePessoaJuridica();
-            this.PessoasJ = facade.ObterPessoaJuridicas();
+            this.PessoasJ = ctx.PessoasJ.ToList();
 
         }
 
@@ -83,29 +81,21 @@ namespace Interface
 
         }
 
+        PessoaJuridica PessoaJuridica = new PessoaJuridica();
+
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             if (ModoCriacaoTime)
             {
                 ctx.PessoasJ.Add(PessoaJuridicaSelecionada);
                 ctx.SaveChanges();
-            }
-            else
-            {
-                if (PessoaJuridicaSelecionada != null
-                    && PessoaJuridicaSelecionada.Id > 0)
+                if (this.PessoaJuridicaSelecionada.Id <= 0)
                 {
-                    PessoaJuridica ParaSalvar = ctx.PessoasJ.Find(PessoaJuridicaSelecionada.Id);
-                    ParaSalvar.Nome = PessoaJuridicaSelecionada.Nome;
-                    ParaSalvar.Fone = PessoaJuridicaSelecionada.Fone;
-                    ParaSalvar.Endereco = PessoaJuridicaSelecionada.Endereco;
-                    ParaSalvar.Cep = PessoaJuridicaSelecionada.Cep;
-                    ParaSalvar.Cnpj = PessoaJuridicaSelecionada.Cnpj;
-                    ctx.Entry(ParaSalvar).State =
-                        System.Data.Entity.EntityState.Modified;
-                    ctx.SaveChanges();
+
+                    ctx.PessoasJ.Add(this.PessoaJuridicaSelecionada);
                 }
             }
+            ctx.SaveChanges();
             MessageBox.Show("Cadastrado/Salvo com sucesso");
         }
 
