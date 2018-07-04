@@ -1,0 +1,62 @@
+﻿<Window x:Class="Interface.WindowModelo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Interface"
+        mc:Ignorable="d"
+        Title="WindowModelo" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label FontSize="16" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2">Tela de Gerenciamento de Modelo</Label>
+        <Label Grid.Row="1" Grid.Column="0">Modelo</Label>        
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=ModeloSelecionado.TipoModelo}"></TextBox>
+        <Label Grid.Row="2" Grid.Column="0">Marca</Label>       
+        <ComboBox Grid.Row="2" Grid.Column="1" 
+                  ItemsSource="{Binding Path=Marcas}"
+                  SelectedItem="{Binding Path=ModeloSelecionado.Marca}"
+                  DisplayMemberPath="MarcaMod"/>
+        <Label Grid.Row="3" Grid.Column="0">Cadarco</Label>
+        <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding Path=ModeloSelecionado.Cadarco}" Margin="194,5,-194,21" Grid.RowSpan="2"></CheckBox>
+        <Label Grid.Row="4" Grid.Column="0">Material</Label>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=ModeloSelecionado.Material}"></TextBox>
+        <Label Grid.Row="5" Grid.Column="0">Cor</Label>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=ModeloSelecionado.Cor}"></TextBox>
+        <DataGrid Grid.Row="6" Grid.ColumnSpan="2" Margin="20" 
+                  x:Name="ModeloDataGridView"
+                  Visibility="{Binding Path=VisibilidadeDataGrid}" 
+                  ItemsSource="{Binding Path=Modelos}" 
+                  SelectedItem="{Binding Path=ModeloSelecionado}"
+                  SelectionChanged="ModeloDataGridView_SelectionChanged"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Modelo" Binding="{Binding TipoModelo}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Marca" Binding="{Binding Marca.MarcaMod}"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Cadarco" Binding="{Binding Cadarco}"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Material" Binding="{Binding Material}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cor" Binding="{Binding Cor}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <Button Grid.Row="7" Grid.Column="0" Width="100" Margin="10"
+                x:Name="OkButton"
+                Click="OkButton_Click">Ok</Button>
+        <Button Grid.Row="7" Grid.Column="1" Width="100" Margin="10"
+                x:Name="CancelarButton"
+                Click="CancelarButton_Click">Cancelar</Button>
+    </Grid>
+</Window>

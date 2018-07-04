@@ -1,0 +1,65 @@
+﻿<Window x:Class="Interface.WindowVenda"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Interface"
+        mc:Ignorable="d"
+        Title="WindowVenda" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label FontSize="16" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2">Tela de Gerenciamento de Venda</Label>
+        <Label Grid.Row="1" Grid.Column="0">Sapato</Label>
+        <ComboBox Grid.Row="1" Grid.Column="1" 
+                  ItemsSource="{Binding Path=Sapato}"
+                  SelectedItem="{Binding Path=VendaSelecionada.Sapato}"
+                  DisplayMemberPath="Id"/>
+        <Label Grid.Row="2" Grid.Column="0">Cliente</Label>
+        <ComboBox Grid.Row="2" Grid.Column="1" 
+                  ItemsSource="{Binding Path=Pessoas}"
+                  SelectedItem="{Binding Path=VendaSelecionada.Cliente}"
+                  DisplayMemberPath="Nome"/>
+        <Label Grid.Row="3" Grid.Column="0">Quantidade</Label>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=VendaSelecionada.Quantidade}"></TextBox>
+        <Label Grid.Row="4" Grid.Column="0">Data da Venda</Label>
+        <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Path=VendaSelecionada.DataVenda}"></DatePicker>
+        <Label Grid.Row="5" Grid.Column="0">Preco</Label>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=VendaSelecionada.PrecoTotal}"></TextBox>
+        <DataGrid Grid.Row="6" Grid.ColumnSpan="2" Margin="20" 
+                  x:Name="VendaDataGridView"
+                  Visibility="{Binding Path=VisibilidadeDataGrid}" 
+                  ItemsSource="{Binding Path=Vendas}" 
+                  SelectedItem="{Binding Path=VendaSelecionada}"
+                  SelectionChanged="VendaDataGridView_SelectionChanged"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Sapato" Binding="{Binding Sapato.ModeloId}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nome}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantidade}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Data da Venda" Binding="{Binding DataVenda}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Preço" Binding="{Binding PrecoTotal}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="7" Grid.Column="0" Width="100" Margin="10"
+                x:Name="OkButton"
+                Click="OkButton_Click">Ok</Button>
+        <Button Grid.Row="7" Grid.Column="1" Width="100" Margin="10"
+                x:Name="CancelarButton"
+                Click="CancelarButton_Click">Cancelar</Button>
+    </Grid>
+</Window>

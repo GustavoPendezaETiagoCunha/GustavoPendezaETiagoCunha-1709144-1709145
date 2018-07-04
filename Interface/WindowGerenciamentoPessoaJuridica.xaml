@@ -1,0 +1,50 @@
+﻿<Window x:Class="Interface.WindowGerenciamentoPessoaJuridica"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Interface"
+        mc:Ignorable="d"
+        Title="WindowGerenciamentoPessoaJuridica" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label FontSize="16" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="4">Tela de Gerenciamento de Pessoa Jurídica</Label>
+        <Label Grid.Row="1" Grid.Column="0">Nome</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=PessoaJuridicaSelecionada.Nome}"></TextBox>
+        <Label Grid.Row="1" Grid.Column="2">Fone</Label>
+        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Path=PessoaJuridicaSelecionada.Fone}"></TextBox>
+        <Label Grid.Row="2" Grid.Column="0">Cep</Label>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=PessoaJuridicaSelecionada.Cep}"></TextBox>
+        <Label Grid.Row="2" Grid.Column="2">Endereco</Label>
+        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Path=PessoaJuridicaSelecionada.Endereco}"></TextBox>
+        <Label Grid.Row="3" Grid.Column="0">CNPJ</Label>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=PessoaJuridicaSelecionada.Cnpj}"></TextBox>
+        <DataGrid Grid.Row="4" Grid.ColumnSpan="4" Margin="20" 
+                  x:Name="PessoaJuridicaDataGridView"
+                  Visibility="{Binding Path=VisibilidadeDataGrid}" 
+                  ItemsSource="{Binding Path=PessoasJ}" 
+                  SelectedItem="{Binding Path=PessoaJuridicaSelecionada}"
+                  SelectionChanged="PessoaJDataGridView_SelectionChanged"
+                  AutoGenerateColumns="True">
+        </DataGrid>
+        <Button Grid.Row="5" Grid.Column="1" Width="100" Margin="10"
+                x:Name="OkButton"
+                Click="OkButton_Click">Ok</Button>
+        <Button Grid.Row="5" Grid.Column="2" Width="100" Margin="10"
+                x:Name="CancelarButton"
+                Click="CancelarButton_Click">Cancelar</Button>
+    </Grid>
+</Window>
